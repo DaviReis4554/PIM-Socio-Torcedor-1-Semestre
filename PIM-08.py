@@ -219,7 +219,7 @@ def login():
         if usuario["user"] == user and usuario["senha"] == senha:   # <- corrigido () → []
             print("Login bem-sucedido!")
             compra()
-            return True
+            return False
         elif usuario["user"] != user and usuario["senha"] != senha:
             print('Esse usuário não existe')
             return False
