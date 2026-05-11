@@ -1,4 +1,5 @@
-import random
+import random #Biblioteca que sorteia números para definir o código do ingresso
+
 usuarios = []
 
 valor_ingresso = 100.00
