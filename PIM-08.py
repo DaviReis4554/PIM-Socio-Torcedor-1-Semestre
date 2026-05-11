@@ -8,7 +8,6 @@ valor_ingresso = 100.00
 def verificar_mensalidade():
 
      try:
-       
          mensalidade = int(input('''Qual o estado da sua mensalidade? 
 1- Ativa 
 2- Não ativa 
