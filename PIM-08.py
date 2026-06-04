@@ -1,239 +1,331 @@
-import random #Biblioteca que sorteia números para definir o código do ingresso
+import random
 
-usuarios = []
+usuarios = [
+    { 
+        "nome": "administrador",
+        "user": 123,
+        "idade": 20,
+        "senha": "123",
+        "mensalidade": True, 
+        "salario": 2000,
+        "plano social": 0, 
+        "plano sócio-torcedor": 6, 
+        "forma de pagamento": 0 
+    }
+]
 
 valor_ingresso = 100.00
-# coloquei cadastro e login la pra baixo pra se precisar chamar a verif de idade, mas na vdd ja fiz ela no propio cadastro - mi
-
 
 def verificar_mensalidade():
-
-     try:
-         mensalidade = int(input('''Qual o estado da sua mensalidade? 
-1- Ativa 
-2- Não ativa 
-3- Em atraso
-: '''))
-         if mensalidade == 1:    #Ativa
-            return True
-         elif mensalidade == 3:        #em atraso
-            print("Você precisa estar com sua mensalidade atualizada para efetuar sua compra. \n Tente novamente mais tarde.")
-            return False
-         else:       #Não ativa
-             print("Você não pode efetivar sua compra devido ao estado atual de sua mensalidade. \n Tente novamente outro dia.")
-             return False
-
-     except ValueError:
-      print('Você deve escolher uma das opções.')
-
-        
-
-desconto_percentual = 0
-def verificar_salario(salario):# aqui fizemos um cálculo baseado no valor do salário mínimo atual
-    if (salario <= 800):
-       desconto_percentual = valor_ingresso*100/100
-       valor_atual = valor_ingresso - desconto_percentual
-       print(f"Você tem direito à 100% de desconto no seu ingresso devido ao plano social, o novo valor é {valor_atual} reais")
-    elif (salario <= 1200 ): 
-         desconto_percentual = valor_ingresso*75/100
-         valor_atual = valor_ingresso - desconto_percentual
-         print(f"Você tem direito à 75% de desconto no seu ingresso devido ao plano social, o novo valor é {valor_atual} reais")
-    elif (salario <= 1600):
-         desconto_percentual = valor_ingresso*25/100
-         valor_atual = valor_ingresso - desconto_percentual
-         print(f"Você tem direito à 25% de desconto no seu ingresso devido ao plano social, o novo valor é {valor_atual} reais")
-    elif (salario <= 2000):
-         desconto_percentual = valor_ingresso*25/100
-         valor_atual = valor_ingresso - desconto_percentual
-    elif (salario > 2000):
-        print("Você não entra na categoria plano social.")
-        return False
-
-
-def verificar_plano_social(): 
-    plano_social = int(input('''Você tem direito ao plano social? 
-1 - Sim 
-2 - Não):'''))
+    while True:
+        try:
+            mensalidade = int(input('''Qual o estado da sua mensalidade? 
     
-    if plano_social == 1:
-        return True
-    elif plano_social == 2:
-        compra = int(input('''Você não faz parte do plano social, portanto não tem acesso a este benefício. 
-        Gostaria de comprar comprar o ingresso mesmo assim?
-1 - Sim
-2 - Não'''))
-        if compra == 1:
-         compra()
-        return False
-    else:
-        print("Resposta inválida. Por favor, responda com '1' ou '2'.")
-        return False
+1- Ativa 
+2- Não ativa
+: '''))
+            if mensalidade == 1:    # Ativa
+                return True
+            elif mensalidade == 2:  # Não ativa
+                print("Você não pode efetivar sua compra devido ao estado atual de sua mensalidade. \nTente novamente outro dia.")
+                return False
+            else:
+                print('Opção inválida. Escolha 1 ou 2.')
+        except ValueError:
+            print('Você deve escolher uma das opções numéricas.')
 
+def verificar_salario(salario):
+    if (salario <= 800):
+        desconto_percentual = valor_ingresso * 100 / 100
+        valor_atual = valor_ingresso - desconto_percentual
+        print(f"Você tem direito à 100% de desconto no seu ingresso devido ao plano social, o novo valor é {valor_atual} reais")
+        return 1
+    elif (salario <= 1200): 
+        desconto_percentual = valor_ingresso * 75 / 100
+        valor_atual = valor_ingresso - desconto_percentual
+        print(f"Você tem direito à 75% de desconto no seu ingresso devido ao plano social, o novo valor é {valor_atual} reais")
+        return 2
+    elif (salario <= 1600):
+        desconto_percentual = valor_ingresso * 25 / 100
+        valor_atual = valor_ingresso - desconto_percentual
+        print(f"Você tem direito à 25% de desconto no seu ingresso devido ao plano social, o novo valor é {valor_atual} reais")
+        return 3
+    else:
+        print("Você não entra na categoria plano social.")
+        return 0
 
 def verificar_plano_socio_torcedor():
- try:
-
-    plano_socio_torcedor = int(input('''Qual plano sócio-torcedor você faz parte?
+    while True:
+        try:
+            plano_socio_torcedor = int(input('''Qual plano sócio-torcedor você faz parte?
 1 - Bronze
 2 - Prata 
 3 - Ouro
 : '''))
 
-    if plano_socio_torcedor == 1:
-        desconto_percentual = valor_ingresso*25/100
-        valor_atual = valor_ingresso - desconto_percentual
-        print(f'''Você tem acesso ao benefício de 25% de desconto em produtos oficiais.
+            if plano_socio_torcedor == 1:
+                desconto_percentual = valor_ingresso * 25 / 100
+                valor_atual = valor_ingresso - desconto_percentual
+                print(f'''Você tem acesso ao benefício de 25% de desconto em produtos oficiais.
 O novo valor do seu ingresso é de R${valor_atual}''')
-        return True
-    elif plano_socio_torcedor == 2:
-        desconto_percentual = valor_ingresso*50/100
-        valor_atual = valor_ingresso - desconto_percentual
-        print(f'''Você tem acesso ao benefício de 50% de desconto em produtos oficiais.
+                return 4
+            elif plano_socio_torcedor == 2:
+                desconto_percentual = valor_ingresso * 50 / 100
+                valor_atual = valor_ingresso - desconto_percentual
+                print(f'''Você tem acesso ao benefício de 50% de desconto em produtos oficiais.
 O novo valor do seu ingresso é de R${valor_atual}''')
-        return True
-    elif plano_socio_torcedor == 3:
-         desconto_percentual = valor_ingresso*75/100
-         valor_atual = valor_ingresso - desconto_percentual
-         print(f'''Você tem acesso ao benefício de 75% de desconto em produtos oficiais.
+                return 5
+            elif plano_socio_torcedor == 3:
+                desconto_percentual = valor_ingresso * 75 / 100
+                valor_atual = valor_ingresso - desconto_percentual
+                print(f'''Você tem acesso ao benefício de 75% de desconto em produtos oficiais.
 O novo valor do seu ingresso é de R${valor_atual}''')
-         return True
- except:    
-    print("Plano sócio-torcedor inválido. Por favor, responda com '1', '2' ou '3'.")
-    return False
-
+                return 6
+            else:
+                print("Opção inválida. Por favor, responda com '1', '2' or '3'.")
+        except ValueError:    
+            print("Por favor, insira um número válido.")
 
 def forma_pagamento():
-    forma_pagamento = int(input("""Qual forma de pagamento você prefere?
-1 - Cartão de crédito
-2 - Cartão de débito
-3 - Pix
-: """)).lower()
+    try:
+        forma = int(input("""Qual forma de pagamento você prefere?
+            1 - Cartão de crédito
+            2 - Cartão de débito
+            3 - Pix
+            : """))
+    except ValueError:
+        print("Opção de pagamento inválida.")
+        return False
     
-    if forma_pagamento == 1:
-        print("Você escolheu pagar com cartão de crédito. Por favor, insira os dados do seu cartão para finalizar a compra.")
+    if forma == 1:
+        print("Você escolheu pagar com cartão de crédito.")
+        numero_cartao = input("Digite o número do seu cartão de crédito (16 dígitos): ")
+        if not numero_cartao.isdigit() or len(numero_cartao) != 16:
+            print("Número de cartão inválido. Deve conter 16 dígitos numéricos.")
+            return False
+        primeiro_digito = numero_cartao[0]
+        if primeiro_digito == "4":
+            bandeira = "VISA"
+        elif primeiro_digito == "5":
+            bandeira = "MasterCard"
+        elif primeiro_digito == "3":
+            bandeira = "AmericanExpress"
+        else:
+            bandeira = "Bandeira desconhecida"
+        print(f"Cartão {bandeira} - {numero_cartao[:4]} cadastrado com sucesso!")
+        print("Compra finalizada com sucesso!")
         return True
-    elif forma_pagamento == 2:
-        print("Você escolheu pagar com cartão de débito. Por favor, insira os dados do seu cartão para finalizar a compra.")
+    elif forma == 2:
+        print("Você escolheu pagar com cartão de débito.")
+        numero_cartao = input("Digite o número do seu cartão de débito (16 dígitos): ")
+        if not numero_cartao.isdigit() or len(numero_cartao) != 16:
+            print("Número de cartão inválido. Deve conter 16 dígitos numéricos.")
+            return False
+        primeiro_digito = numero_cartao[0]
+        if primeiro_digito == "4":
+            bandeira = "VISA"
+        elif primeiro_digito == "5":
+            bandeira = "MasterCard"
+        elif primeiro_digito == "3":
+            bandeira = "AmericanExpress"
+        else:
+            bandeira = "Bandeira desconhecida"
+        print(f"Cartão {bandeira} - {numero_cartao[:4]} cadastrado com sucesso!")
+        print("Compra finalizada com sucesso!")
         return True
-    elif forma_pagamento == 3:
+    elif forma == 3:
         print("Você escolheu pagar com pix. Por favor, escaneie o código QR para finalizar a compra.")
+        chave_pix = input("Digite a chave pix:")
+        if chave_pix.strip() == "":
+            print("Chave Pix inválida. Por favor, tente novamente.")
+            return False
+        print("Compra finalizada com sucesso!")
         return True
     else:
-        print("Forma de pagamento inválida. Por favor, responda com '1', '2' ou '3'.")
+        print("Opção de pagamento inválida.")
         return False
-
 
 def sair():
     print("Obrigado por utilizar nosso sistema. Até a próxima!")
     exit()
 
-
 def menu():
-    while True:
-        print("Menu de opções:")
-        print("1 - CADASTRO")
-        print("2 - LOGIN E COMPRA ")
-        print("3 - SAIR")
+    print("\n--- Menu de opções ---")
+    print("1 - CADASTRO")
+    print("2 - LOGIN E COMPRA")
+    print("3 - SAIR")
+    try:
         opcao = int(input("Selecione a opção de sua escolha: "))
         if opcao == 1:
             cadastrar()
         elif opcao == 2:
-            login()
+            indice_usuario = login()
+            if indice_usuario != -1:
+                compra(indice_usuario)
         elif opcao == 3:
             sair() 
         else:
             print("Opção inválida. Tente novamente.")
-
+    except ValueError:
+        print("Digite um número válido do menu.")
 
 def cadastrar():
     while True:
+        existe = False
         try:
-            nome = input("Digite seu nome completo: ").lower() 
-            user = int(input("Digite seu CPF, que será seu usuário: ")) # try: verificar se user já existe 
-            senha = input("Digite sua senha: ")
-            idade = int(input("Digite sua idade: "))
-            if idade < 18:                                   
-                print('Você deve ser maior de 18 anos para fazer uma compra.')
+            user = int(input("Digite seu CPF, que será seu usuário: "))
+        except ValueError:
+            print('Tente novamente. CPF inválido.')
+            continue
+            
+        for usuario in usuarios:
+            if usuario["user"] == user:
+                print('Este usuário já existe')
+                existe = True
                 break
-            elif idade <= 0:
-                print('Idade inválida.')
-                break
+        if not existe:
+            break
+
+    try:
+        nome = input("Digite seu nome completo: ").lower() 
+        senha = input("Digite sua senha: ")
+        idade = int(input("Digite sua idade: "))
+    except ValueError:
+        print('Tente novamente. Dados inválidos.')
+        return False
+
+    if idade < 18:                                      
+        print('Você deve ser maior de 18 anos para fazer uma compra.')
+        return False
+    elif idade <= 0:
+        print('Idade inválida.')
+        return False
+
+    try:
+        salario = float(input("Digite seu salário atual: "))
+    except ValueError:
+        print('Tente novamente. Salário inválido.')
+        return False
+
+    plano_social = verificar_salario(salario)
+    plano_socio_torcedor = 0
+    mensalidade_usuario = False
+
+    if plano_social == 0:
+        print("Você não tem direito ao plano social, mas pode aproveitar os benefícios do plano sócio-torcedor.")
+        plano_socio_torcedor = verificar_plano_socio_torcedor()
+        mensalidade_usuario = verificar_mensalidade()
+                 
+    usuario = {
+        "nome": nome,
+        "user": user,
+        "idade": idade,
+        "senha": senha,
+        "mensalidade": mensalidade_usuario, 
+        "salario": salario,
+        "plano social": plano_social, 
+        "plano sócio-torcedor" : plano_socio_torcedor, 
+        "forma de pagamento": 0 
+    }
+    
+    usuarios.append(usuario)
+    print("Cadastro realizado com sucesso!")
+    return True
+
+def plano():
+    try:
+        A = int(input("""Você participa do plano social??
+1- sim  
+2- não: """))
+    except ValueError:
+        print("Opção inválida.")
+        return
+
+    if A == 1:
+        print("O valor do seu ingresso depende do seu salário cadastrado.")
+        forma_pagamento() 
+    elif A == 2:
+        try:
+            B = int(input("""Ok! Gostaria de comprar seu ingresso pelo valor integral ou aproveitar os benefícios do plano sócio-torcedor?
+1- Quero comprar pelo valor integral
+2- Quero aproveitar os benefícios do plano sócio-torcedor
+: """))
+            if B == 1:
+                print("Ótimo! Você pode efetivar sua compra pelo valor integral, o valor do seu ingresso é de 100,00 reais.")
+                forma_pagamento()
+            elif B == 2:
+                plano_usuario = verificar_plano_socio_torcedor()
+                mensalidade_usuario = verificar_mensalidade()   
+                if plano_usuario == 4 and mensalidade_usuario == True:
+                    print("Ótimo! Você pode efetivar sua compra, o valor do seu ingresso é de 75,00 reais.")
+                    forma_pagamento()
+                elif plano_usuario == 5 and mensalidade_usuario == True:
+                    print("Ótimo! Você pode efetivar sua compra, o valor do seu ingresso é de 50,00 reais.")
+                    forma_pagamento()
+                elif plano_usuario == 6 and mensalidade_usuario == True:
+                    print("Ótimo! Você pode efetivar sua compra, o valor do seu ingresso é de 25,00 reais.")
+                    forma_pagamento()
+                else:
+                    print("Compra não autorizada (mensalidade inativa ou plano inválido).")
             else:
-                salario = float(input("Digite seu salário atual:"))
-                # verificar_salario(salario) == por conta desse verificar_salario, ele tava fazendo o texto aparecer 2 vezes, entao tive que tirar
-                if not verificar_salario(salario):   
-                    verificar_mensalidade()
-                    verificar_plano_socio_torcedor()     
-                    print("Cadastro realizado com sucesso!")
-                    menu()      
-#                  
-                usuario = {
-                        "nome": nome,
-                        "user": user,
-                        "idade": idade,
-                        "senha": senha,
-                        "mensalidade": verificar_mensalidade, #se for 100% deixar vazio
-                        "salario": salario,
-                        "plano social": verificar_plano_social,
-                        "plano sócio-torcedor": verificar_plano_socio_torcedor, #se for 100% deixar vazio
-                        "forma de pagamento": forma_pagamento #se for 100% deixar vazio 'retirar um ingresso por mês'?
-                }
-                
-                usuarios.append(usuario)
-                print("Cadastro realizado com sucesso!")
-                menu() 
-        except:
-            print('Tente novamete. Algo deu errado.')
+                print("Opção inválida.")
+        except ValueError:
+            print("Entrada inválida.")
 
-
-
-def compra():
-    if login() == True:
-          compra()
-    if verificar_plano_social == 3:
-        numero_ingresso = random.randint(1000000,1000000)
-        print(f'Compra finalizada com sucesso! O número do seu ingresso é {numero_ingresso}.')
-    elif verificar_plano_social == 1 or verificar_plano_social == 2:
-        print(f'O valor do seu ingressso com desconto é de {verificar_salario(desconto_percentual)}')
-        a = int(input('''Deseja finalizar o pagamento?
-1 - Sim
-2 - Não
-: '''))
-        if a == 1:
-            forma_pagamento()
-            numero_ingresso = random.randint(1000000,1000000)
-            b = int(input('''Você realizou o pagamento?
-1 - Sim
-2 - Não
-: '''))
-            if b == 1:
-                print(f'Compra finalizada com sucesso! O número do seu ingresso é {numero_ingresso}.')
-        elif a == 2:
-            menu()
+def compra(ind):
+    print(f"\nBem-vindo {usuarios[ind]['nome']}! Vamos finalizar sua compra.")
+    plano_social = usuarios[ind]['plano social']
+    plano_torcedor = usuarios[ind]['plano sócio-torcedor']
+    mensalidade_usuario = usuarios[ind]['mensalidade']
+    
+    # 1º Caso: Tem direito ao plano social
+    if plano_social == 1:
+        print("O valor do seu ingresso é de R$0,00 (100% de desconto pelo Plano Social).")
+        print("Compra finalizada automaticamente!")
+        return
+    elif plano_social == 2:
+        print("O valor do seu ingresso é de R$25,00 (75% de desconto pelo Plano Social).")
+        forma_pagamento()
+    elif plano_social == 3:
+        print("O valor do seu ingresso é de R$75,00 (25% de desconto pelo Plano Social).")
+        forma_pagamento()
         
+    # 2º Caso: Depende do plano Sócio-Torcedor (precisa estar com a mensalidade ativa)
+    elif plano_torcedor == 4 and mensalidade_usuario == True:
+        print("O valor do seu ingresso é de 75,00 reais (Desconto Sócio-Torcedor Bronze).")
+        forma_pagamento()
+    elif plano_torcedor == 5 and mensalidade_usuario == True:
+        print("O valor do seu ingresso é de 50,00 reais (Desconto Sócio-Torcedor Prata).")
+        forma_pagamento()
+    elif plano_torcedor == 6 and mensalidade_usuario == True:
+        print("O valor do seu ingresso é de 25,00 reais (Desconto Sócio-Torcedor Ouro).")
+        forma_pagamento()
+    else:
+        if plano_torcedor != 0 and mensalidade_usuario == False:
+            print("Sua mensalidade de sócio-torcedor está atrasada! O valor cobrado será o integral.")
+        print("O valor do seu ingresso é de 100,00 reais.")
+        forma_pagamento()
 
 def login():
-    user = int(input("Digite seu CPF:"))
-    senha = input("Digite sua senha:")
+    try:
+        user = int(input("Digite seu CPF: "))
+    except ValueError:
+        print("CPF deve ser numérico.")
+        return -1
+        
+    senha = input("Digite sua senha: ")
+    
+    indice = 0
     for usuario in usuarios:
-        if usuario["user"] == user and usuario["senha"] == senha:   # <- corrigido () → []
-            print("Login bem-sucedido!")
-            compra()
-            return False
-        elif usuario["user"] != user and usuario["senha"] != senha:
-            print('Esse usuário não existe')
-            return False
-        else:    
-            print("Usuário ou senha incorretos.")
-            return False
+        if usuario["user"] == user and usuario["senha"] == senha:
+            print("Login bem-sucedido!") 
+            return indice
+        indice += 1
+              
+    print("Usuário ou senha incorretos.")
+    return -1
 
-
+# Loop principal do programa para manter o menu rodando de forma limpa
 while True:
-      print(menu())
-      
-          
-         
-
-#antes de finalizar a compra, o sistema irá verificar se o usuário tem direito a algum desconto baseado no salário, plano social e plano sócio-torcedor. O sistema também irá verificar se a mensalidade do usuário está ativa para que ele possa efetivar sua compra.
-#observações: questão dos acentos gráficos, o sistema não aceita acentos, então as palavras devem ser digitadas sem acentos para que o sistema funcione corretamente. Exemplo: "sim" ao invés de "sím".
-#fazer uma opção no menu para compra
+    menu()
+    input("\nPressione Enter para continuar...")  # Pausa para o usuário conseguir ler as mensagens na tela
