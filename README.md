@@ -21,6 +21,6 @@
 <h4> Os dados apresentados e utilizados no sistema são fictícios e simulados, tendo sido criados exclusivamente para fins acadêmicos e de demonstração.</h4>
 
 # DESENVOLVEDORES 💻
-<h4>@DaviReis4554</h4>
-<h4>@NikolyNeris</h4>
+<h4>[Davi Reis (Eu)](https://github.com/DaviReis4554)</h4>
+<h4>[Nikoly Neris](https://github.com/NikolyNeris)</h4>
 <h5>(Os outros desenvolvedores não possuem GitHub no momento.)</h5>
