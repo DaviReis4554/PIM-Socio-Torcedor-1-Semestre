@@ -5,4 +5,10 @@
 </h4>
 
 # LINGUAGEM USADA🐍
-- Python
+- Python 3.11
+
+<h4>📚Bibliotecas usadas:</h4>
+• random
+
+# COMO UTILIZAR❓
+1. Instale o Python em seu desktop: [Instalar Python](https://www.python.org/downloads/)
