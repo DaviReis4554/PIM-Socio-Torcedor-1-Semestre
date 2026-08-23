@@ -1,5 +1,4 @@
 # SOFTWARE SISTEMA DE SÓCIO TORCEDOR DE UM CLUBE (1º SEMESTRE)💻
-
 <h4>
     Software desenvolvido em Python para representar, de forma prática, um sistema de sócio torcedor de um clube de futebol, permitindo o controle de usuários e a aquisição de ingressos com base nos benefícios disponíveis para cada modalidade.⚽
 </h4>
@@ -21,6 +20,7 @@
 <h4> Os dados apresentados e utilizados no sistema são fictícios e simulados, tendo sido criados exclusivamente para fins acadêmicos e de demonstração.</h4>
 
 # DESENVOLVEDORES 💻
-<h4>[Davi Reis (Eu)](https://github.com/DaviReis4554)</h4>
-[Nikoly Neris](https://github.com/NikolyNeris)
+Davi Reis - [GitHub](https://github.com/DaviReis4554)
+<br>
+Nikoly Neris - [GitHub](https://github.com/NikolyNeris)
 <h5>(Os outros desenvolvedores não possuem GitHub no momento.)</h5>
